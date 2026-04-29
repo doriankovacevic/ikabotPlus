@@ -1590,7 +1590,6 @@ def _notify_movement_report(session):
         return
 
     if len(movements) == 0:
-        _send_to_bot_chunked(session, "-- MOVEMENT REPORT --\nThere are no movements.")
         return
 
     report_blocks = []
