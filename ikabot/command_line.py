@@ -9,6 +9,7 @@ import time
 
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
 from ikabot.config import *
@@ -55,8 +56,8 @@ from ikabot.helpers.process import updateProcessList
 from ikabot.web.session import *
 from ikabot.function.UpgradeUnits import UpgradeUnits
 from ikabot.function.modifyProduction import modifyProduction
-from ikabot.function.UpgradeUnits import UpgradeUnits
 from ikabot.function.developer import developer
+from ikabot.function.sendCulturalTreatyRequests import sendCulturalTreatyRequests
 
 
 def menu(session, checkUpdate=True):
@@ -160,6 +161,7 @@ def menu(session, checkUpdate=True):
         2109: developer,
         22: consolidateResources,
         23: modifyProduction,
+        24: sendCulturalTreatyRequests,
     }
 
     print("(0)  Exit")
@@ -186,6 +188,7 @@ def menu(session, checkUpdate=True):
     print("(21) Options / Settings")
     print("(22) Consolidate resources")
     print("(23) Set Production of Saw mill / Luxury good")
+    print("(24) Send cultural treaty requests")
 
     total_options = len(menu_actions) + 1
     selected = read(min=0, max=total_options, digit=True, empty=True)
@@ -263,8 +266,9 @@ def menu(session, checkUpdate=True):
         print("(0) Back")
         print("(1) Monitor islands")
         print("(2) Dump & Search world")
+        print("(3) Monitor inactive players in radius")
 
-        selected = read(min=0, max=2, digit=True)
+        selected = read(min=0, max=3, digit=True)
         if selected == 0:
             menu(session)
             return
