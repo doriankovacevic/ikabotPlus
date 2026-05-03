@@ -8,6 +8,7 @@ import sys
 import time
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from ikabot.config import *
@@ -27,7 +28,6 @@ from ikabot.function.distributeResources import distributeResources
 from ikabot.function.donate import donate
 from ikabot.function.donationBot import donationBot
 from ikabot.function.dumpWorld import dumpWorld
-from ikabot.function.inactivePlayersRadiusMonitor import inactivePlayersRadiusMonitor
 from ikabot.function.getStatus import getStatus
 from ikabot.function.importExportCookie import importExportCookie
 from ikabot.function.Research import research
@@ -149,7 +149,6 @@ def menu(session, checkUpdate=True):
         1902: autoBarbarians,
         2001: searchForIslandSpaces,
         2002: dumpWorld,
-        2003: inactivePlayersRadiusMonitor,
         2101: proxyConf,
         2102: updateTelegramData,
         2103: killTasks,
@@ -160,7 +159,7 @@ def menu(session, checkUpdate=True):
         2108: loadCustomModule,
         2109: developer,
         22: consolidateResources,
-        23: modifyProduction
+        23: modifyProduction,
     }
 
     print("(0)  Exit")
@@ -190,9 +189,9 @@ def menu(session, checkUpdate=True):
 
     total_options = len(menu_actions) + 1
     selected = read(min=0, max=total_options, digit=True, empty=True)
-    
+
     # refresh main menu on hitting enter
-    if selected == '':
+    if selected == "":
         return menu(session)
 
     if selected == 7:
@@ -264,9 +263,8 @@ def menu(session, checkUpdate=True):
         print("(0) Back")
         print("(1) Monitor islands")
         print("(2) Dump & Search world")
-        print("(3) Monitor inactive players in radius")
-        
-        selected = read(min=0, max=3, digit=True)
+
+        selected = read(min=0, max=2, digit=True)
         if selected == 0:
             menu(session)
             return
@@ -376,6 +374,8 @@ if __name__ == "__main__":
 #############################################################
 # This is necessary to ensure that flask is frozen together #
 # with other requirements when creating ikabot.exe          #
-try: import flask                                           #
-except: pass                                                #
+try:
+    import flask  #
+except:
+    pass  #
 #############################################################
